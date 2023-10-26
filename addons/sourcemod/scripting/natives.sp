@@ -51,11 +51,15 @@ int Native_RegisterMinigame(Handle plugin, int numParams)
         return -1;
     }
 
+    // Check if enabled/disabled
+    bool enabled = GetNativeCell(4);
+
     // Create minigame and push to list
     HL2Ware_Minigames minigame;
     Format(minigame.Name, sizeof(minigame.Name), name);
     Format(minigame.Description, sizeof(minigame.Description), description);
     minigame.Duration = duration;
+    minigame.Enabled = enabled;
     minigame.ID = g_Minigames.PushArray(minigame); // TODO: Check that this actually works
     
     return minigame.ID;

@@ -9,9 +9,10 @@
  * @param name          The title of the minigame.
  * @param description   A short description about the minigame.
  * @param duration      How long the minigame should last in seconds.
+ * @param enabled       Whether the minigame should be enabled/disabled when registered, defaults to true
  * @return              An ID that the core plugin has assigned to the minigame if successful, else -1
  */
-native int HL2Ware_RegisterMinigame(const char[] name, const char[] description, float duration);
+native int HL2Ware_RegisterMinigame(const char[] name, const char[] description, float duration, bool enabled = true);
 
 /**
  * Gets whether a player is actively participating in the game.
