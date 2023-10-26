@@ -48,6 +48,7 @@ enum struct HL2Ware_Players
 
 HL2Ware_Players g_Players[MAXPLAYERS + 1];
 
+GlobalForward g_CoreLoadedFwd;
 GlobalForward g_MinigameStartFwd;
 GlobalForward g_MinigameEndFwd;
 
@@ -82,10 +83,16 @@ public void OnPluginStart()
     RegConsoleCmd("sm_leavegame", Command_LeaveGame, "Removes you from the game and moves you to spectator");
     RegConsoleCmd("sm_joingame", Command_JoinGame, "Adds you to the game and removes you from spectator");
 
+    g_CoreLoadedFwd = new GlobalForward("HL2Ware_OnCoreLoaded", ET_Ignore);
     g_MinigameStartFwd = new GlobalForward("HL2Ware_OnMinigameStart", ET_Hook, Param_Cell);
     g_MinigameEndFwd = new GlobalForward("HL2Ware_OnMinigameEnd", ET_Ignore, Param_Cell);
 
     g_Minigames = new ArrayList(sizeof(HL2Ware_Minigames));
+public void OnConfigsExecuted()
+{
+    // Tell dependant plugins that we've finished loading
+    Call_StartForward(g_CoreLoadedFwd);
+    Call_Finish();
 }
 
 public void OnClientPutInServer(int client)

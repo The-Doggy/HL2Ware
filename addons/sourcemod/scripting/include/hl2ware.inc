@@ -5,6 +5,7 @@
 
 /**
  * Registers a minigame module with the core plugin.
+ * This should only be called during HL2Ware_OnCoreLoaded.
  * 
  * @param name          The title of the minigame.
  * @param description   A short description about the minigame.
@@ -29,6 +30,14 @@ native bool HL2Ware_IsPlayer(int client);
  * @noreturn
  */
 native void HL2Ware_PassPlayer(int client);
+
+/**
+ * Called when the core plugin has loaded and configs have been executed.
+ * Registering minigames should be done only within this forward.
+ * 
+ * @noreturn
+ */
+forward void HL2Ware_OnCoreLoaded();
 
 /**
  * Called when a minigame is about to start.
