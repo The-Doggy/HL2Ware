@@ -49,3 +49,22 @@ forward Action HL2Ware_OnMinigameStart(int id);
  */
 forward void HL2Ware_OnMinigameEnd(int id);
 
+public SharedPlugin __pl_hl2ware =
+{
+    name = "hl2ware",
+    file = "hl2ware.smx",
+#if defined REQUIRE_PLUGIN
+    required = 1,
+#else
+    required = 0,
+#endif
+};
+
+#if !defined REQUIRE_PLUGIN
+public void __pl_hl2ware_SetNTVOptional()
+{
+    MarkNativeAsOptional("HL2Ware_RegisterMinigame");
+    MarkNativeAsOptional("HL2Ware_IsPlayer");
+    MarkNativeAsOptional("HL2Ware_PassPlayer");
+}
+#endif
